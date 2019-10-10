@@ -48,7 +48,7 @@ def make_melon_types():
 
     crenshaw = MelonType('cren', '1996', 'green', False, None, 'Crenshaw')
     crenshaw.add_pairing(['proscuitto'])
-    
+
     yellow_watermelon = MelonType('yw',
                                   '2013',
                                   'yellow',
@@ -95,9 +95,26 @@ print(make_melon_type_lookup(melon_list))
 
 class Melon(object):
     """A melon in a melon harvest."""
+    def __init__(self, melon_type, shape_rating, color_rating, 
+                 harvested_field, harvested_by):
+        self.melon_type = melon_type
+        self.shape_rating = shape_rating
+        self.color_rating = color_rating
+        self.harvested_field = harvested_field
+        self.harvested_by = harvested_by
 
-    # Fill in the rest
-    # Needs __init__ and is_sellable methods
+    def is_sellable(self):
+    #Sellable vs Non-sellable (Behavior)
+    # if shape and color rating > 5 AND not from field 3 
+        if ((self.shape_rating > 5) 
+            and (self.color_rating > 5) 
+            and (self.harvested_field != 3)):  #then sellable 
+           return True 
+        
+        return False  #else not sellable 
+    
+melon_1 = Melon('yw', 7, 10, 3, 'Shelia')
+print(melon_1.is_sellable())
 
 def make_melons(melon_types):
     """Returns a list of Melon objects."""
