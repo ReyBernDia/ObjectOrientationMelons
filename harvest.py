@@ -18,6 +18,9 @@ class MelonType(object):
         self.is_bestseller = is_bestseller
         self.name = name
 
+    def __repr__(self):
+        return f'<MelonType code={self.code}>'
+
     def add_pairing(self, pairings):
         """Add a food pairing to the instance's pairings list."""
 
@@ -33,36 +36,58 @@ class MelonType(object):
 def make_melon_types():
     """Returns a list of current melon types."""
 
-    all_melon_types = []
+    # all_melon_types = []
 
     #instatiate the class MelonType 
     #call add_pairing to add pairings to instance 
     muskmelon = MelonType('musk', '1998', 'green', True, True, 'Muskmelon')
     muskmelon.add_pairing(['mint'])
+
     casaba = MelonType('cas', '2003', 'orange', False, None, 'Casaba')
     casaba.add_pairing(['strawberry', 'mint'])
+
     crenshaw = MelonType('cren', '1996', 'green', False, None, 'Crenshaw')
     crenshaw.add_pairing(['proscuitto'])
-    yellow_watermelon = MelonType('yw', '2013', 'yellow', False, 
-        True, 'Yellow Watermelon')
+    
+    yellow_watermelon = MelonType('yw',
+                                  '2013',
+                                  'yellow',
+                                  False, 
+                                  True,
+                                  'Yellow Watermelon')
     yellow_watermelon.add_pairing(['ice cream'])
 
     #return a list of objects of MelonType
-    all_melon_types.extend((muskmelon, casaba, crenshaw, yellow_watermelon))
+    # all_melon_types.extend((muskmelon, casaba, crenshaw, yellow_watermelon))
     
-    return all_melon_types
+    return [muskmelon, casaba, crenshaw, yellow_watermelon]
 
-make_melon_types()
+melon_list = make_melon_types()
 
 def print_pairing_info(melon_types):
     """Prints information about each melon type's pairings."""
 
-    # Fill in the rest
+    for melon in melon_types:
+        print(f'{melon.name} pairs with')
+
+        for pairs in melon.pairings:
+            print(f'-{pairs}')
+        
+
+print_pairing_info(melon_list)
 
 def make_melon_type_lookup(melon_types):
     """Takes a list of MelonTypes and returns a dictionary of melon type by code."""
+    #create a dictionary - keys = codes, values = melon type instance for code
+    #('yw', yellow_watermelon)
+    melon_dict = {}
 
-    # Fill in the rest
+    for melon in melon_types:
+        melon_dict[melon.code] = melon_dict.get(melon.code,melon)
+
+    return melon_dict
+    
+print(make_melon_type_lookup(melon_list))
 
 ############
 # Part 2   #
