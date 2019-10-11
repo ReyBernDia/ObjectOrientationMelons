@@ -151,3 +151,32 @@ def get_sellability_report(melons):
 
 get_sellability_report(harvested_melons)
 
+#use previous dictionary 
+#set the value of the attribute to be an instance of MelonType - Not String 
+#melon_9 = Melon(melon_types['yw'], 7, 10, 3, 'Sheila')
+
+
+def melon_instantiation_by_txt(file_name, melon_type_dictionary):
+    #loop the txt file 
+    file = open(file_name)
+    harvested_melon_list = []
+    
+    for line in file:
+        line = line.rstrip()
+        info_list = line.split() #split by space 
+        #append new objects to list 
+        harvested_melon_list.append(Melon(melon_type_dictionary[info_list[5]], 
+                                    int(info_list[1]), 
+                                    int(info_list[3]), 
+                                    int(info_list[11]), 
+                                    info_list[8]))
+
+    return harvested_melon_list
+
+harvest = melon_instantiation_by_txt('harvest_log.txt', melon_type_dictionary)
+print(harvest)
+
+# get_sellability_report(melon_instantiation_by_txt('harvest_log.txt', melon_type_dictionary))
+
+
+    
